@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "LoginViewController.keyboardWillShow(notification:):LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.loginButton.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewController.activateConstraints():LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.scrollView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
