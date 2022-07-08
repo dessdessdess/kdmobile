@@ -52,33 +52,31 @@ class LoginViewController: UIViewController {
     private let serviceView: UIView = {
         let serviceView = UIView()
         serviceView.translatesAutoresizingMaskIntoConstraints = false
-        //serviceView.backgroundColor = .red
         return serviceView
     }()
     
-    private let loginTextField: UITextField = {
-        let loginTextField = UITextField()
-        loginTextField.translatesAutoresizingMaskIntoConstraints = false
-        loginTextField.placeholder = "Логин"
-        loginTextField.font = UIFont.systemFont(ofSize: 15)
-        loginTextField.borderStyle = UITextField.BorderStyle.roundedRect
-        loginTextField.autocorrectionType = UITextAutocorrectionType.no
-        //loginTextField.keyboardType = UIKeyboardType.default
-        loginTextField.returnKeyType = UIReturnKeyType.done
-        loginTextField.clearButtonMode = UITextField.ViewMode.whileEditing
-        loginTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+    private let userNameTextField: UITextField = {
+        let userNameTextField = UITextField()
+        userNameTextField.translatesAutoresizingMaskIntoConstraints = false
+        userNameTextField.placeholder = "Логин"
+        userNameTextField.font = UIFont.systemFont(ofSize: 15)
+        userNameTextField.borderStyle = UITextField.BorderStyle.roundedRect
+        userNameTextField.autocorrectionType = UITextAutocorrectionType.no
+        userNameTextField.returnKeyType = UIReturnKeyType.done
+        userNameTextField.clearButtonMode = UITextField.ViewMode.whileEditing
+        userNameTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
         
-        return loginTextField
+        return userNameTextField
     }()
     
     private let passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.placeholder = "Пароль"
         passwordTextField.font = UIFont.systemFont(ofSize: 15)
         passwordTextField.borderStyle = UITextField.BorderStyle.roundedRect
         passwordTextField.autocorrectionType = UITextAutocorrectionType.no
-        //passwordTextField.keyboardType = UIKeyboardType.default
         passwordTextField.returnKeyType = UIReturnKeyType.done
         passwordTextField.clearButtonMode = UITextField.ViewMode.whileEditing
         passwordTextField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
@@ -101,7 +99,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(self.scrollView)
         self.scrollView.addSubview(self.serviceView)
         self.serviceView.addSubview(self.logoImageView)
-        self.scrollView.addSubview(self.loginTextField)
+        self.scrollView.addSubview(self.userNameTextField)
         self.scrollView.addSubview(self.passwordTextField)
         self.scrollView.addSubview(self.loginButton)
     }
@@ -124,13 +122,13 @@ class LoginViewController: UIViewController {
             self.logoImageView.centerXAnchor.constraint(equalTo: self.serviceView.centerXAnchor),
             self.logoImageView.centerYAnchor.constraint(equalTo: self.serviceView.centerYAnchor),
             
-            self.loginTextField.heightAnchor.constraint(equalToConstant: 50),
-            self.loginTextField.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 60),
-            self.loginTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 20),
-            self.loginTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            self.userNameTextField.heightAnchor.constraint(equalToConstant: 50),
+            self.userNameTextField.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 60),
+            self.userNameTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 20),
+            self.userNameTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
             
             self.passwordTextField.heightAnchor.constraint(equalToConstant: 50),
-            self.passwordTextField.topAnchor.constraint(equalTo: self.loginTextField.bottomAnchor, constant: 5),
+            self.passwordTextField.topAnchor.constraint(equalTo: self.userNameTextField.bottomAnchor, constant: 5),
             self.passwordTextField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,constant: 20),
             self.passwordTextField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
             
@@ -171,7 +169,53 @@ class LoginViewController: UIViewController {
     
     @objc private func loginPressed() {
         
-        self.dismiss(animated: true, completion: nil)
+        guard let userName = userNameTextField.text, let password = passwordTextField.text else { return }
+        let loginString = "\(userName):\(password)"
+        guard let loginData = loginString.data(using: String.Encoding.utf8) else { return }
+    
+        let base64LoginString = loginData.base64EncodedString()
+        
+        guard let url = URL(string: "http://192.168.11.30/Brinex_abzanov.r/hs/StoragePointV2/Test") else { return }
+                
+        var request = URLRequest(url: url,timeoutInterval: 30)
+        request.addValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    
+                    self.saveAuthorizationData(userName: userName, password: password)
+                    
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    
+                } else {
+                    
+                    DispatchQueue.main.async {
+                        self.userNameTextField.shake()
+                        self.passwordTextField.shake()
+                        
+                    }
+                    
+                }
+            }
+                                    
+        }
+        
+        task.resume()
+                
+    }
+    
+    private func saveAuthorizationData(userName: String, password: String) {
+      
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(true, forKey: UserDefaultsKeys.isAuthorized)
+        userDefaults.set(userName, forKey: UserDefaultsKeys.userName)
+        userDefaults.set(password, forKey: UserDefaultsKeys.password)
         
     }
     

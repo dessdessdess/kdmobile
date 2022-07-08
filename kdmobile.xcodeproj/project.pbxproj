@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8406E8232876E6C000E1C300 /* AcceptedTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406E8222876E6C000E1C300 /* AcceptedTaskModel.swift */; };
+		8406E82728771AE900E1C300 /* DetailTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8406E82628771AE900E1C300 /* DetailTaskViewController.swift */; };
+		840E2AB72869CBEC008E65F0 /* MainButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2AB62869CBEC008E65F0 /* MainButtons.swift */; };
+		840E2AB92869CCAF008E65F0 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2AB82869CCAF008E65F0 /* MainCollectionViewCell.swift */; };
+		840E2ABB2869E49D008E65F0 /* SectionSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2ABA2869E49D008E65F0 /* SectionSelectionViewController.swift */; };
 		8424CD82285C6B430076348F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424CD81285C6B430076348F /* AppDelegate.swift */; };
 		8424CD84285C6B430076348F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424CD83285C6B430076348F /* SceneDelegate.swift */; };
 		8424CD8C285C6B430076348F /* kdmobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8424CD8A285C6B430076348F /* kdmobile.xcdatamodeld */; };
@@ -16,11 +21,22 @@
 		8424CD9F285C8A600076348F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424CD9E285C8A600076348F /* SettingsViewController.swift */; };
 		8424CDA1285C8C230076348F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424CDA0285C8C230076348F /* MainViewController.swift */; };
 		8424CDA3285C905E0076348F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424CDA2285C905D0076348F /* LoginViewController.swift */; };
-		8424CDA5285C926D0076348F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8424CDA4285C926D0076348F /* LoginView.swift */; };
+		842C056928731B24002491A7 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C056828731B24002491A7 /* LoadingViewController.swift */; };
+		842E3A3D286C7C6000C8C66E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E3A3C286C7C6000C8C66E /* Network.swift */; };
 		84360CBB2860AE3B00B7FB42 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84360CBA2860AE3B00B7FB42 /* Extentions.swift */; };
+		84E4832F28646F3100790FDD /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4832E28646F3100790FDD /* UserDefaultsKeys.swift */; };
+		84EB035C286B1C3C0017DF39 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB035B286B1C3C0017DF39 /* TasksViewController.swift */; };
+		84EB035E286B1C6B0017DF39 /* AcceptedTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EB035D286B1C6B0017DF39 /* AcceptedTasksViewController.swift */; };
+		84EC3AC3286C365B008D7A0B /* TasksListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC3AC2286C365B008D7A0B /* TasksListTableViewCell.swift */; };
+		84EC3AC5286C395A008D7A0B /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EC3AC4286C395A008D7A0B /* TaskModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8406E8222876E6C000E1C300 /* AcceptedTaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedTaskModel.swift; sourceTree = "<group>"; };
+		8406E82628771AE900E1C300 /* DetailTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskViewController.swift; sourceTree = "<group>"; };
+		840E2AB62869CBEC008E65F0 /* MainButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtons.swift; sourceTree = "<group>"; };
+		840E2AB82869CCAF008E65F0 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		840E2ABA2869E49D008E65F0 /* SectionSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionSelectionViewController.swift; sourceTree = "<group>"; };
 		8424CD7E285C6B430076348F /* kdmobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kdmobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8424CD81285C6B430076348F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8424CD83285C6B430076348F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,8 +48,14 @@
 		8424CD9E285C8A600076348F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8424CDA0285C8C230076348F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8424CDA2285C905D0076348F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		8424CDA4285C926D0076348F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		842C056828731B24002491A7 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		842E3A3C286C7C6000C8C66E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		84360CBA2860AE3B00B7FB42 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		84E4832E28646F3100790FDD /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		84EB035B286B1C3C0017DF39 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		84EB035D286B1C6B0017DF39 /* AcceptedTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptedTasksViewController.swift; sourceTree = "<group>"; };
+		84EC3AC2286C365B008D7A0B /* TasksListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListTableViewCell.swift; sourceTree = "<group>"; };
+		84EC3AC4286C395A008D7A0B /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				8424CD8A285C6B430076348F /* kdmobile.xcdatamodeld */,
+				840E2AB62869CBEC008E65F0 /* MainButtons.swift */,
+				84EC3AC4286C395A008D7A0B /* TaskModel.swift */,
+				8406E8222876E6C000E1C300 /* AcceptedTaskModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -85,7 +110,8 @@
 		8424CD99285C87F20076348F /* views */ = {
 			isa = PBXGroup;
 			children = (
-				8424CDA4285C926D0076348F /* LoginView.swift */,
+				840E2AB82869CCAF008E65F0 /* MainCollectionViewCell.swift */,
+				84EC3AC2286C365B008D7A0B /* TasksListTableViewCell.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -95,7 +121,12 @@
 			children = (
 				8424CD9E285C8A600076348F /* SettingsViewController.swift */,
 				8424CDA0285C8C230076348F /* MainViewController.swift */,
+				840E2ABA2869E49D008E65F0 /* SectionSelectionViewController.swift */,
+				84EB035B286B1C3C0017DF39 /* TasksViewController.swift */,
+				84EB035D286B1C6B0017DF39 /* AcceptedTasksViewController.swift */,
+				8406E82628771AE900E1C300 /* DetailTaskViewController.swift */,
 				8424CD9C285C89180076348F /* TabBarController.swift */,
+				842C056828731B24002491A7 /* LoadingViewController.swift */,
 				8424CDA2285C905D0076348F /* LoginViewController.swift */,
 			);
 			path = controllers;
@@ -106,9 +137,11 @@
 			children = (
 				8424CD81285C6B430076348F /* AppDelegate.swift */,
 				84360CBA2860AE3B00B7FB42 /* Extentions.swift */,
+				84E4832E28646F3100790FDD /* UserDefaultsKeys.swift */,
 				8424CD83285C6B430076348F /* SceneDelegate.swift */,
 				8424CD8D285C6B440076348F /* Assets.xcassets */,
 				8424CD8F285C6B440076348F /* LaunchScreen.storyboard */,
+				842E3A3C286C7C6000C8C66E /* Network.swift */,
 				8424CD92285C6B440076348F /* Info.plist */,
 			);
 			path = common;
@@ -185,13 +218,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				8424CDA3285C905E0076348F /* LoginViewController.swift in Sources */,
+				840E2AB92869CCAF008E65F0 /* MainCollectionViewCell.swift in Sources */,
+				84EC3AC3286C365B008D7A0B /* TasksListTableViewCell.swift in Sources */,
 				8424CD8C285C6B430076348F /* kdmobile.xcdatamodeld in Sources */,
+				84E4832F28646F3100790FDD /* UserDefaultsKeys.swift in Sources */,
+				842C056928731B24002491A7 /* LoadingViewController.swift in Sources */,
+				84EB035E286B1C6B0017DF39 /* AcceptedTasksViewController.swift in Sources */,
 				8424CD82285C6B430076348F /* AppDelegate.swift in Sources */,
+				84EB035C286B1C3C0017DF39 /* TasksViewController.swift in Sources */,
+				840E2ABB2869E49D008E65F0 /* SectionSelectionViewController.swift in Sources */,
 				8424CD9D285C89180076348F /* TabBarController.swift in Sources */,
+				842E3A3D286C7C6000C8C66E /* Network.swift in Sources */,
+				840E2AB72869CBEC008E65F0 /* MainButtons.swift in Sources */,
+				8406E8232876E6C000E1C300 /* AcceptedTaskModel.swift in Sources */,
+				8406E82728771AE900E1C300 /* DetailTaskViewController.swift in Sources */,
 				8424CDA1285C8C230076348F /* MainViewController.swift in Sources */,
 				8424CD84285C6B430076348F /* SceneDelegate.swift in Sources */,
-				8424CDA5285C926D0076348F /* LoginView.swift in Sources */,
 				8424CD9F285C8A600076348F /* SettingsViewController.swift in Sources */,
+				84EC3AC5286C395A008D7A0B /* TaskModel.swift in Sources */,
 				84360CBB2860AE3B00B7FB42 /* Extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
