@@ -103,12 +103,7 @@ class TasksListTableViewCell: UITableViewCell {
         self.clientLabel.text = taskModel.client
         self.documentTypeLabel.text = taskModel.documentType
         self.numberLabel.text = taskModel.number
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        let date = dateFormatter.date(from: taskModel.date)!
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        let stringDate = dateFormatter.string(from: date)
-        self.dateLabel.text = stringDate
+        self.dateLabel.text = TaskModel.getFormatDate(dateToFormat: taskModel.date)
         
     }
     

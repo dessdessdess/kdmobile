@@ -27,6 +27,9 @@ class AcceptedTasksViewController: UIViewController {
         self.configureTableView()
         self.setupSubViews()
         self.activateConstraints()
+        
+        self.loadSavedAcceptedTasks()
+        
     }
     
     private func configureTableView() {
@@ -59,6 +62,13 @@ class AcceptedTasksViewController: UIViewController {
         ])
     }
     
+    private func loadSavedAcceptedTasks() {
+        if let acceptedTasksData = UserDefaults.standard.object(forKey: UserDefaultsKeys.acceptedTasks) as? Data,
+           let acceptedTasks = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(acceptedTasksData) as? [AcceptedTaskModel] {
+            self.acceptedTasksData = acceptedTasks
+        }
+    }
+    
     @objc private func getAcceptedTasks() {
         
         let params = ["GUIDСклада": "313dd8f4-b47f-11eb-bbaa-c81f66f5fe1a",
@@ -74,13 +84,20 @@ class AcceptedTasksViewController: UIViewController {
                                                 
                         guard let acceptedDataTasksFromNetwork = try? self.decoder.decode(AcceptedTaskCommonModel.self, from: data) else { return }
                         
-                        self.acceptedTasksData = acceptedDataTasksFromNetwork.docsArray
+                        for item in acceptedDataTasksFromNetwork.docsArray {
+                            if !self.acceptedTasksData.contains(where: {$0.guid == item.guid}) {
+                                self.acceptedTasksData.append(item)
+                            }
+                        }
+                        
+                        //self.acceptedTasksData = acceptedDataTasksFromNetwork.docsArray
                         self.acceptedTasksData.sort(by: <)
                         
                         DispatchQueue.main.async {
                             
                             self.refreshControl.endRefreshing()
                             self.tableView.reloadData()
+                            self.saveData()
                                                                                     
                         }
                         
@@ -96,6 +113,13 @@ class AcceptedTasksViewController: UIViewController {
                
         task.resume()
         
+    }
+        
+    func saveData() {
+        let acceptedTasksData = try? NSKeyedArchiver.archivedData(withRootObject: self.acceptedTasksData, requiringSecureCoding: false)
+        
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(acceptedTasksData, forKey: UserDefaultsKeys.acceptedTasks)
     }
     
 }
@@ -114,7 +138,9 @@ extension AcceptedTasksViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailTaskViewController()
-        self.navigationItem.backButtonTitle = "Назад"
+        detailVC.delegate = self
+        detailVC.acceptedTask = acceptedTasksData[indexPath.row]
+        self.navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

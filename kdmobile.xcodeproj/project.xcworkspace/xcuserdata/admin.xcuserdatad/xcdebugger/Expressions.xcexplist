@@ -3,10 +3,32 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "TaskTableViewCell.setup(with:):TaskTableViewCell.swift">
+         contextName = "DetailTaskViewController.tableView(_:cellForRowAt:):DetailTaskViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DetailTaskViewController.setupSubviews():DetailTaskViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "dateFormatter.date(from: taskModel.date)">
+               value = "detailTaskHeader.translatesAutoresizingMaskIntoConstraints">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TasksViewController.tableView(_:didSelectRowAt:):TasksViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.selectedTasks">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AcceptedTasksViewController.getAcceptedTasks():AcceptedTasksViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.acceptedTasksData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -15,22 +37,6 @@
          <PersistentStrings>
             <PersistentString
                value = "self.loginButton.frame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SettingsViewController.didTapExitButton():SettingsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "tabBarDelegate?">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LoginViewController.activateConstraints():LoginViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.scrollView.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -57,13 +63,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TasksViewController.tableView(_:didSelectRowAt:):TasksViewController.swift">
+         contextName = "SettingsViewController.didTapExitButton():SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.selectedTasks">
+               value = "tabBarDelegate?">
             </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewController.activateConstraints():LoginViewController.swift">
+         <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "self.scrollView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProductTableViewCell.setup(product:):ProductTableViewCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TaskTableViewCell.setup(with:):TaskTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dateFormatter.date(from: taskModel.date)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DetailTaskViewController.tableView(_:numberOfRowsInSection:):DetailTaskViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.acceptedTask?.products.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

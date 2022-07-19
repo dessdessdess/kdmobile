@@ -11,4 +11,5 @@ enum UserDefaultsKeys {
     static let userName = "userName"
     static let password = "password"
     static let isAuthorized = "isAuthorized"
+    static let acceptedTasks = "acceptedTasks"
 }

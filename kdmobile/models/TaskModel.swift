@@ -30,4 +30,13 @@ class TaskModel: Codable, Comparable, TaskModelProtocol {
         case client = "Клиент"
     }
     
+    static func getFormatDate(dateToFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let date = dateFormatter.date(from: dateToFormat)!
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let stringDate = dateFormatter.string(from: date)
+        return stringDate
+    }
+    
 }
