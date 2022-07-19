@@ -146,8 +146,8 @@
 			children = (
 				8424CD81285C6B430076348F /* AppDelegate.swift */,
 				84360CBA2860AE3B00B7FB42 /* Extentions.swift */,
-				84E4832E28646F3100790FDD /* UserDefaultsKeys.swift */,
 				8424CD83285C6B430076348F /* SceneDelegate.swift */,
+				84E4832E28646F3100790FDD /* UserDefaultsKeys.swift */,
 				8424CD8D285C6B440076348F /* Assets.xcassets */,
 				8424CD8F285C6B440076348F /* LaunchScreen.storyboard */,
 				842E3A3C286C7C6000C8C66E /* Network.swift */,
