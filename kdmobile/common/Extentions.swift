@@ -44,7 +44,7 @@ extension UITextField {
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         animation.duration = 0.6
         animation.values = [-16.0, 16.0, -16.0, 16.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
-        layer.add(animation, forKey: "shake")   
+        layer.add(animation, forKey: "shake")  
     }
 }
  
