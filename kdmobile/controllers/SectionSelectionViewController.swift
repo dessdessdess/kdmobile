@@ -78,7 +78,7 @@ class SectionSelectionViewController: UIViewController {
     }
     
     @objc private func showAcceptedTasksButtonTapped() {
-        let acceptedTasksVC = AcceptedTasksViewController()
+        let acceptedTasksVC = AcceptedTasksViewController2()
         acceptedTasksVC.sectionIndex = self.sectionIndex
         self.navigationController?.pushViewController(acceptedTasksVC, animated: true)
     }

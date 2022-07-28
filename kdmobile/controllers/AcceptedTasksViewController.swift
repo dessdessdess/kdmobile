@@ -85,7 +85,7 @@ class AcceptedTasksViewController: UIViewController {
                         guard let acceptedDataTasksFromNetwork = try? self.decoder.decode(AcceptedTaskCommonModel.self, from: data) else { return }
                         
                         for item in acceptedDataTasksFromNetwork.docsArray {
-                            if !self.acceptedTasksData.contains(where: {$0.guid == item.guid}) {
+                            if !self.acceptedTasksData.contains(where: {$0 == item}) {
                                 self.acceptedTasksData.append(item)
                             }
                         }
@@ -125,22 +125,36 @@ class AcceptedTasksViewController: UIViewController {
 }
 
 extension AcceptedTasksViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.acceptedTasksData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "tasksListTableViewCell", for: indexPath) as? TasksListTableViewCell else { return UITableViewCell() }
-        let acceptedTask = self.acceptedTasksData[indexPath.row]
-        cell.setup(with: acceptedTask, selected: false)
+        //let acceptedTask = self.acceptedTasksData[indexPath.row]
+        //cell.setup(with: acceptedTask, selected: false)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = DetailTaskViewController()
-        detailVC.delegate = self
-        detailVC.acceptedTask = acceptedTasksData[indexPath.row]
-        self.navigationItem.backButtonTitle = ""
-        self.navigationController?.pushViewController(detailVC, animated: true)
+//        let detailVC = DetailTaskViewController()
+//        detailVC.delegate = self
+//        detailVC.acceptedTask = acceptedTasksData[indexPath.row]
+//        self.navigationItem.backButtonTitle = ""
+//        self.navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            self.acceptedTasksData.remove(at: indexPath.row)
+            self.saveData()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "Удалить"
+    }
+    
 }

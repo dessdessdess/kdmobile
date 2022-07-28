@@ -89,7 +89,7 @@ class ProductTableViewCell: UITableViewCell {
         ])
     }
     
-    func setup(product: Product) {
+    func setup(product: ProductS) {
         self.nomenclatureLabel.text = product.nomenclature
         self.characteristicLabel.text = product.characteristic
         self.countLabel.text = String(product.count)

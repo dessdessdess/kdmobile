@@ -186,11 +186,11 @@ extension TasksViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     fileprivate func setAcceptButtonTitle() {
-        let selectesTaskCount = self.selectedTasks.count
-        if selectesTaskCount == 0 {
+        let selectedTaskCount = self.selectedTasks.count
+        if selectedTaskCount == 0 {
             self.acceptButton.setTitle("Принять задания", for: .normal)
         } else {
-            self.acceptButton.setTitle("Принять задания (\(selectesTaskCount))", for: .normal)
+            self.acceptButton.setTitle("Принять задания (\(selectedTaskCount))", for: .normal)
         }
     }
     

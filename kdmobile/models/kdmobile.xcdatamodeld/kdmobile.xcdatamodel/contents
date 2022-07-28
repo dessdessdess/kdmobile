@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AcceptedTask" representedClassName="AcceptedTask" syncable="YES">
+        <attribute name="client" attributeType="String" defaultValueString=""/>
+        <attribute name="date" attributeType="String" defaultValueString=""/>
+        <attribute name="documentType" attributeType="String" defaultValueString=""/>
+        <attribute name="guid" attributeType="String" defaultValueString=""/>
+        <attribute name="number" attributeType="String" defaultValueString=""/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductS" inverseName="acceptedTask" inverseEntity="ProductS"/>
+    </entity>
+    <entity name="ProductS" representedClassName="ProductS" syncable="YES">
+        <attribute name="characteristic" attributeType="String" defaultValueString=""/>
+        <attribute name="count" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nomenclature" attributeType="String" defaultValueString=""/>
+        <attribute name="scanCount" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unit" attributeType="String" defaultValueString=""/>
+        <relationship name="acceptedTask" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AcceptedTask" inverseName="products" inverseEntity="AcceptedTask"/>
+    </entity>
+    <elements>
+        <element name="AcceptedTask" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="ProductS" positionX="521.9375" positionY="47.052734375" width="128" height="133"/>
+    </elements>
 </model>

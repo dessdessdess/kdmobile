@@ -54,9 +54,9 @@ class AcceptedTaskModel: NSObject, NSCoding, Codable, TaskModelProtocol {
         case products = "Товары"
     }
     
-//    static func == (lhs: AcceptedTaskModel, rhs: AcceptedTaskModel) -> Bool {
-//        lhs.guid == rhs.guid
-//    }
+    static func == (lhs: AcceptedTaskModel, rhs: AcceptedTaskModel) -> Bool {
+        lhs.guid == rhs.guid
+    }
            
     static func < (lhs: AcceptedTaskModel, rhs: AcceptedTaskModel) -> Bool {
         lhs.date < rhs.date

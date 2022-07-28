@@ -9,10 +9,18 @@ import UIKit
 
 class DetailTaskViewController: UIViewController {
 
-    lazy var delegate: AcceptedTasksViewController? = nil
-    lazy var acceptedTask: AcceptedTaskModel? = nil
+    var acceptedTask: AcceptedTask? {
+        didSet(newValue) {
+            guard let acceptedTask = acceptedTask else {
+                return
+            }
+            self.products = dataManager?.getProducts(acceptedTask: acceptedTask) ?? []
+        }
+    }
+    lazy var dataManager: DataManager? = nil
     private lazy var detailTaskHeader = UIView()
     private let tableView = UITableView()
+    private lazy var products: [ProductS] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,28 +86,27 @@ class DetailTaskViewController: UIViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
                 
     }
-    
+        
 }
 
 extension DetailTaskViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.acceptedTask?.products.count ?? 0
+        return self.acceptedTask?.products?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "productTableViewCell") as! ProductTableViewCell
-        let product = self.acceptedTask?.products[indexPath.row]
-        cell.setup(product: product!)
+        cell.setup(product: self.products[indexPath.row])                
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let currentProduct = self.acceptedTask?.products[indexPath.row] {
-            if currentProduct.scanCount < currentProduct.count {
-                currentProduct.scanCount += 1
-                self.tableView.reloadRows(at: [indexPath], with: .none)
-                self.delegate?.saveData()
-            }
+        let currentProduct = self.products[indexPath.row]
+        if currentProduct.scanCount < currentProduct.count {
+            currentProduct.scanCount += 1
+            dataManager?.saveContext()
+            self.tableView.reloadRows(at: [indexPath], with: .none)
         }
         
     }
