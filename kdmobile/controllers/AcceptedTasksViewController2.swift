@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AcceptedTasksViewController2: UIViewController, AfterLoadDataFromNetwork {
+class AcceptedTasksViewController2: UIViewController {
     
     private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
@@ -60,12 +60,13 @@ class AcceptedTasksViewController2: UIViewController, AfterLoadDataFromNetwork {
     
     @objc private func getAcceptedTasks() {
         
-        let networkManager = NetworkManager(vc: self)
-        networkManager.getAcceptedTasks(vc: self, dataManager: self.dataManager)
+        let networkManager = NetworkManager()
+        //networkManager.getAcceptedTasks(vc: self, dataManager: self.dataManager)
+        networkManager.getAcceptedTasks(dataManager: self.dataManager, completion: self.tableViewEndRefreshing)
           
     }
     
-    func tableViewEndRefreshing() {
+    private func tableViewEndRefreshing() {
         self.tableView.reloadData()
         self.refreshControl.endRefreshing()
     }

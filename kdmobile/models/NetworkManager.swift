@@ -10,18 +10,13 @@ import UIKit
 
 final class NetworkManager {
     
-    private let userDefaults = UserDefaults.standard
     private let pathToServer = "http://192.168.11.30/Brinex_abzanov.r/hs/StoragePointV2"
     private let userGuid = "eaf3c420-11c1-11e6-814f-c81f66f5f5a5"
     private let warehouseGuid = "313dd8f4-b47f-11eb-bbaa-c81f66f5fe1a"
-    private let decoder = JSONDecoder()
-    let vc: AfterLoadDataFromNetwork
-    
-    init(vc: AfterLoadDataFromNetwork) {
-        self.vc = vc
-    }
         
     private func getRequest(with params: [String:Any], requestPath: String) -> URLRequest? {
+        
+        let userDefaults = UserDefaults.standard
         
         guard let userName = userDefaults.string(forKey: UserDefaultsKeys.userName), let password = userDefaults.string(forKey: UserDefaultsKeys.password) else { return nil }
         let loginString = "\(userName):\(password)"
@@ -42,8 +37,8 @@ final class NetworkManager {
         return request
         
     }
-    
-    func getAcceptedTasks(vc: AcceptedTasksViewController2, dataManager: DataManager) {
+        
+    func getAcceptedTasks(dataManager: DataManager, completion: @escaping ()->Void ) {
         
         let params = ["GUIDСклада": warehouseGuid,
                       "GUIDПользователя": userGuid]
@@ -57,9 +52,11 @@ final class NetworkManager {
                     
                     if let data = data {
                         
-                        let newDecoder = JSONDecoder()
-                        
-                        guard let acceptedDataTasksFromNetwork = try? newDecoder.decode(AcceptedTaskCommonModel.self, from: data) else { return }
+                        //let jsonResult = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSMutableDictionary
+                                                                    
+                        let decoder = JSONDecoder()
+                                                
+                        guard let acceptedDataTasksFromNetwork = try? decoder.decode(AcceptedTaskCommonModel.self, from: data) else { return }
                         
                         for item in acceptedDataTasksFromNetwork.docsArray {
                             if !dataManager.containsAcceptedTask(guid: item.guid) {
@@ -68,8 +65,8 @@ final class NetworkManager {
                         }
                                                 
                         DispatchQueue.main.async {
-                            vc.tableViewEndRefreshing()
-                        }
+                            completion()
+                       }
                         
                     }
                                         
