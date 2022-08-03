@@ -61,7 +61,6 @@ class AcceptedTasksViewController2: UIViewController {
     @objc private func getAcceptedTasks() {
         
         let networkManager = NetworkManager()
-        //networkManager.getAcceptedTasks(vc: self, dataManager: self.dataManager)
         networkManager.getAcceptedTasks(dataManager: self.dataManager, completion: self.tableViewEndRefreshing)
           
     }

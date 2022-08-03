@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol AfterLoadDataFromNetwork {
-    
-    func tableViewEndRefreshing()
-    
-}
+//protocol AfterLoadDataFromNetwork {
+//    
+//    func tableViewEndRefreshing()
+//    
+//}
