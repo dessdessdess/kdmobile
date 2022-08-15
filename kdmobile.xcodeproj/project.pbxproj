@@ -28,6 +28,7 @@
 		842C056928731B24002491A7 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C056828731B24002491A7 /* LoadingViewController.swift */; };
 		842E3A3D286C7C6000C8C66E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842E3A3C286C7C6000C8C66E /* Network.swift */; };
 		84360CBB2860AE3B00B7FB42 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84360CBA2860AE3B00B7FB42 /* Extentions.swift */; };
+		844BA80628A4EBB20074A56E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BA80528A4EBB20074A56E /* LoginView.swift */; };
 		8450C9612885373C000F4E82 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8450C9602885373C000F4E82 /* ProductTableViewCell.swift */; };
 		845370352878510B003CCB3A /* DetailTaskHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845370342878510B003CCB3A /* DetailTaskHeader.swift */; };
 		845370372878591C003CCB3A /* DetailTaskHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845370362878591C003CCB3A /* DetailTaskHeaderModel.swift */; };
@@ -65,6 +66,7 @@
 		842C056828731B24002491A7 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		842E3A3C286C7C6000C8C66E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		84360CBA2860AE3B00B7FB42 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		844BA80528A4EBB20074A56E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8450C9602885373C000F4E82 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		845370342878510B003CCB3A /* DetailTaskHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskHeader.swift; sourceTree = "<group>"; };
 		845370362878591C003CCB3A /* DetailTaskHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskHeaderModel.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				840E2AB82869CCAF008E65F0 /* MainCollectionViewCell.swift */,
 				84EC3AC2286C365B008D7A0B /* TasksListTableViewCell.swift */,
 				8450C9602885373C000F4E82 /* ProductTableViewCell.swift */,
+				844BA80528A4EBB20074A56E /* LoginView.swift */,
 				845370342878510B003CCB3A /* DetailTaskHeader.swift */,
 			);
 			path = views;
@@ -269,6 +272,7 @@
 				8406E82728771AE900E1C300 /* DetailTaskViewController.swift in Sources */,
 				8424CDA1285C8C230076348F /* MainViewController.swift in Sources */,
 				845370372878591C003CCB3A /* DetailTaskHeaderModel.swift in Sources */,
+				844BA80628A4EBB20074A56E /* LoginView.swift in Sources */,
 				8424CD84285C6B430076348F /* SceneDelegate.swift in Sources */,
 				8424CD9F285C8A600076348F /* SettingsViewController.swift in Sources */,
 				84EC3AC5286C395A008D7A0B /* TaskModel.swift in Sources */,

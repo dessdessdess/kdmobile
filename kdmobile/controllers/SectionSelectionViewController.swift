@@ -15,7 +15,7 @@ class SectionSelectionViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        self.navigationItem.title = mainButtons[self.sectionIndex]
+        self.navigationItem.title = MainButtons.mainButtons[self.sectionIndex]
         self.navigationItem.backButtonTitle = ""
         self.setupSubviews()
         self.activateConstraints()
@@ -26,7 +26,7 @@ class SectionSelectionViewController: UIViewController {
         
         let showTasksButton = UIButton()
         showTasksButton.translatesAutoresizingMaskIntoConstraints = false
-        showTasksButton.setTitle("Задания на \(mainButtonsDeclinationTasks[mainButtons[self.sectionIndex]] ?? "")", for: .normal)
+        showTasksButton.setTitle("Задания на \(MainButtons.mainButtonsDeclinationTasks[MainButtons.mainButtons[self.sectionIndex]] ?? "")", for: .normal)
         showTasksButton.setTitleColor(.white, for: .normal)
         showTasksButton.backgroundColor = UIColor(hexString: "008e55")
         showTasksButton.layer.cornerRadius = 10
@@ -39,7 +39,7 @@ class SectionSelectionViewController: UIViewController {
         
         let showAcceptedTasksButton = UIButton()
         showAcceptedTasksButton.translatesAutoresizingMaskIntoConstraints = false
-        showAcceptedTasksButton.setTitle("Приступить к \(mainButtonsDeclinationAcceptedTasks[mainButtons[self.sectionIndex]] ?? "")", for: .normal)
+        showAcceptedTasksButton.setTitle("Приступить к \(MainButtons.mainButtonsDeclinationAcceptedTasks[MainButtons.mainButtons[self.sectionIndex]] ?? "")", for: .normal)
         showAcceptedTasksButton.setTitleColor(.white, for: .normal)
         showAcceptedTasksButton.backgroundColor = UIColor(hexString: "008e55")
         showAcceptedTasksButton.layer.cornerRadius = 10

@@ -22,8 +22,8 @@ class TasksViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        self.section = mainButtons[self.sectionIndex]
-        self.navigationItem.title = "Задания на \(mainButtonsDeclinationTasks[self.section] ?? "")"
+        self.section = MainButtons.mainButtons[self.sectionIndex]
+        self.navigationItem.title = "Задания на \(MainButtons.mainButtonsDeclinationTasks[self.section] ?? "")"
         
         self.configureTableView()
         self.setupSubViews()

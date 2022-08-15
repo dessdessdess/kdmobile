@@ -17,9 +17,10 @@ class DetailTaskViewController: UIViewController {
             self.products = dataManager?.getProducts(acceptedTask: acceptedTask) ?? []
         }
     }
-    lazy var dataManager: DataManager? = nil
+    
+    var dataManager: DataManager?
     private lazy var detailTaskHeader = UIView()
-    private let tableView = UITableView()
+    private lazy var tableView = UITableView()
     private lazy var products: [ProductS] = []
     
     override func viewDidLoad() {

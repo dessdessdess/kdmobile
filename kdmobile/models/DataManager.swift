@@ -8,19 +8,19 @@
 import Foundation
 import CoreData
 
-var persistentContainer: NSPersistentContainer = {
-    
-    let container = NSPersistentContainer(name: "kdmobile")
-    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-        if let error = error as NSError? {
-            
-            fatalError("Unresolved error \(error), \(error.userInfo)")
-        }
-    })
-    return container
-}()
-
 class DataManager: NSObject {
+    
+    private let persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "kdmobile")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
     
     private let acceptedTaskFetchRequest: NSFetchRequest<AcceptedTask> = AcceptedTask.fetchRequest()
     private let acceptedTasksFetchResultController: NSFetchedResultsController<AcceptedTask>
@@ -28,26 +28,29 @@ class DataManager: NSObject {
     private let productFetchRequest: NSFetchRequest<ProductS> = ProductS.fetchRequest()
     private let productFetchResultController: NSFetchedResultsController<ProductS>
         
-    override init() {
+    init(sortDescriptors:[NSSortDescriptor], productSortDescriptor:[NSSortDescriptor]) {
             
-        let sortDescriptor = NSSortDescriptor(key: "number", ascending: true)
-        acceptedTaskFetchRequest.sortDescriptors = [sortDescriptor]
-                
-        acceptedTasksFetchResultController = NSFetchedResultsController(fetchRequest: acceptedTaskFetchRequest, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        self.acceptedTaskFetchRequest.sortDescriptors = sortDescriptors
+        self.acceptedTasksFetchResultController = NSFetchedResultsController(fetchRequest: self.acceptedTaskFetchRequest, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
-        let productSortDescriptor = NSSortDescriptor(key: "nomenclature", ascending: true)
-        productFetchRequest.sortDescriptors = [productSortDescriptor]
-                
-        productFetchResultController = NSFetchedResultsController(fetchRequest: productFetchRequest, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        self.productFetchRequest.sortDescriptors = productSortDescriptor
+        self.productFetchResultController = NSFetchedResultsController(fetchRequest: self.productFetchRequest, managedObjectContext: persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         super.init()
         
-        try? acceptedTasksFetchResultController.performFetch()
-        try? productFetchResultController.performFetch()
+        try? self.acceptedTasksFetchResultController.performFetch()
+        try? self.productFetchResultController.performFetch()
                
-        acceptedTasksFetchResultController.delegate = self
-        productFetchResultController.delegate = self
+        self.acceptedTasksFetchResultController.delegate = self
+        self.productFetchResultController.delegate = self
         
+    }
+    
+    static func configuredDataManager() -> DataManager {
+        let sortDescriptor = NSSortDescriptor(key: "number", ascending: true)
+        let productSortDescriptor = NSSortDescriptor(key: "nomenclature", ascending: true)
+        let dataManager = DataManager(sortDescriptors:[sortDescriptor], productSortDescriptor: [productSortDescriptor])
+        return dataManager
     }
     
     func saveContext () {

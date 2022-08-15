@@ -86,7 +86,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return mainButtons.count
+        return MainButtons.mainButtons.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,7 +95,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.backgroundColor = .systemRed
             return cell
         }
-        cell.setupTitle(title: mainButtons[indexPath.row])
+        cell.setupTitle(title: MainButtons.mainButtons[indexPath.row])
         let mainButtonTapGestureRecognizer = MainButtonTapGestureReconizer(target:self, action: #selector(self.mainButtonTapped))
         mainButtonTapGestureRecognizer.indexPath = indexPath
         cell.addGestureRecognizer(mainButtonTapGestureRecognizer)

@@ -9,17 +9,17 @@ import UIKit
 
 class AcceptedTasksViewController2: UIViewController {
     
-    private let tableView = UITableView()
-    private let refreshControl = UIRefreshControl()
-    private let dataManager = DataManager()
+    private lazy var dataManager = DataManager.configuredDataManager()
+    private lazy var tableView = UITableView()
+    private lazy var refreshControl = UIRefreshControl()
     var sectionIndex:Int = 0
-    private var section = ""
-    
+    private lazy var section = ""
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        self.section = mainButtons[self.sectionIndex]
+        self.section = MainButtons.mainButtons[self.sectionIndex]
         self.navigationItem.title = "\(self.section) (В работе)"
         
         self.configureTableView()
@@ -60,22 +60,31 @@ class AcceptedTasksViewController2: UIViewController {
     
     @objc private func getAcceptedTasks() {
         
-        let networkManager = NetworkManager()
-        networkManager.getAcceptedTasks(dataManager: self.dataManager, completion: self.tableViewEndRefreshing)
-          
-    }
-    
-    private func tableViewEndRefreshing() {
-        self.tableView.reloadData()
-        self.refreshControl.endRefreshing()
-    }
+        NetworkManager.configuredNetworkManager().getAcceptedTasks(completion: { [weak self] acceptedTasksName in
+            
+            guard let strongSelf = self else { return }
+            
+            if let acceptedTasksName = acceptedTasksName {
+                for item in acceptedTasksName {
+                    if strongSelf.dataManager.containsAcceptedTask(guid: item.guid) {
+                        strongSelf.dataManager.createAcceptedTask(acceptedTask: item)
+                    }
+                }
+            }
+            
+            strongSelf.tableView.reloadData()
+            strongSelf.refreshControl.endRefreshing()
+            
+        })
         
+    }
+                  
 }
 
 extension AcceptedTasksViewController2: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataManager.getAcceptedTasksCount(section: section)
+        return dataManager.getAcceptedTasksCount(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,7 +96,7 @@ extension AcceptedTasksViewController2: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailTaskViewController()
-        detailVC.dataManager = dataManager
+        detailVC.dataManager = self.dataManager
         detailVC.acceptedTask = dataManager.getAcceptedTask(indexPath: indexPath)
         self.navigationItem.backButtonTitle = ""
         self.navigationController?.pushViewController(detailVC, animated: true)
