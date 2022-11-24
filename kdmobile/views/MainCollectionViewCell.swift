@@ -12,7 +12,7 @@ class MainCollectionViewCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.textColor = .white
+        titleLabel.textColor = .black
         titleLabel.font = .boldSystemFont(ofSize: 20)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 2
@@ -21,9 +21,11 @@ class MainCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor(hexString: "008e55")
+        self.backgroundColor = .systemGray5
         self.contentView.addSubview(self.titleLabel)
-        self.layer.cornerRadius = 20
+        self.layer.cornerRadius = 10
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor(hexString: "008e55").cgColor
         self.activateConstraints()
     }
     

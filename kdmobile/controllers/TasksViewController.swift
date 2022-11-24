@@ -14,8 +14,9 @@ class TasksViewController: UIViewController {
     private let refreshControl = UIRefreshControl()
     var sectionIndex:Int = 0
     private var section = ""
-    private let decoder = JSONDecoder()
-    private let network = Network()
+//    private let decoder = JSONDecoder()
+//    private let network = Network()
+    private let networkManager = NetworkManager.configuredNetworkManager()
     private var selectedTasks: [Int] = []
     
     override func viewDidLoad() {
@@ -79,43 +80,26 @@ class TasksViewController: UIViewController {
     }
     
     @objc private func getTasks() {
-         
-        let params = ["GUIDСклада": "313dd8f4-b47f-11eb-bbaa-c81f66f5fe1a",
-                      "GUIDПользователя": "eaf3c420-11c1-11e6-814f-c81f66f5f5a5"]
-        guard let request = network.getRequest(with: params, section: self.section, type: "Tasks") else { return }
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        
+        networkManager.getTasks { [weak self] dataTasksFromNetwork in
             
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    
-                    if let data = data {
-                        
-                        guard let dataTasksFromNetwork = try? self.decoder.decode([TaskModel].self, from: data) else { return }
-                        
-                        self.tasksData = dataTasksFromNetwork
-                        self.tasksData.sort(by: <)
-                        
-                        DispatchQueue.main.async {
-                            self.selectedTasks.removeAll()
-                            self.refreshControl.endRefreshing()
-                            self.tableView.reloadData()
-                            self.setAcceptButtonTitle()
-                                                        
-                        }
-                        
-                    }
-                                        
-                } else {
-                    
-                    print(httpResponse.statusCode)
-                    
-                }
-            }
-        }
-               
-        task.resume()
+            guard let dataTasksFromNetwork = dataTasksFromNetwork else {
                 
+                self?.refreshControl.endRefreshing()
+                return
+                
+            }
+            
+            self?.tasksData = dataTasksFromNetwork
+            self?.tasksData.sort(by: <)
+            
+            self?.selectedTasks.removeAll()
+            self?.refreshControl.endRefreshing()
+            self?.tableView.reloadData()
+            self?.setAcceptButtonTitle()
+            
+        }
+        
     }
     
     @objc private func acceptButtonTapped() {
@@ -127,46 +111,22 @@ class TasksViewController: UIViewController {
         loadingVC.modalPresentationStyle = .overCurrentContext
         loadingVC.modalTransitionStyle = .crossDissolve
         present(loadingVC, animated: true, completion: nil)
-        
-        self.refreshControl.beginRefreshing()
-                
+                        
         var selectedTasksToTransfer:[[String:String]] = []
         
         for index in self.selectedTasks {
+           
             let task = ["ВидДокумента":self.tasksData[index].documentType,
                         "GUID":self.tasksData[index].guid]
             
             selectedTasksToTransfer.append(task)
-                        
+             
         }
                 
-        let params: [String:Any] = ["GUIDПользователя":"eaf3c420-11c1-11e6-814f-c81f66f5f5a5",
-                                    "МассивЗаданий":selectedTasksToTransfer]
-        
-        
-        guard let request = network.getRequest(with: params, section: self.section, type: "WriteAcceptedTasks") else { return }
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                                           
-                        DispatchQueue.main.async {
-                            
-                            self.getTasks()
-                            loadingVC.dismiss(animated: false, completion: nil)
-                            
-                        }
-                                        
-                } else {
-                    
-                    print(httpResponse.statusCode)
-                    
-                }
-            }
+        networkManager.acceptTasks(selectedTasksToTransfer: selectedTasksToTransfer) { [weak self] in
+            self?.getTasks()
+            loadingVC.dismiss(animated: false, completion: nil)
         }
-        
-        task.resume()
         
     }
     

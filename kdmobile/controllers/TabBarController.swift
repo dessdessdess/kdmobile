@@ -8,12 +8,13 @@
 import UIKit
 
 class TabBarController: UITabBarController, TabBarCurrentViewController {
-    
+        
     let mainVC = MainViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBar.backgroundColor = .systemGray5
         self.tabBar.tintColor = UIColor(hexString: "008e55")
             
         self.mainVC.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(systemName: "bolt"), tag: 0)
@@ -26,6 +27,13 @@ class TabBarController: UITabBarController, TabBarCurrentViewController {
             UINavigationController(rootViewController: settingsVC)
         ], animated: true)
             
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        UserDefaults.standard.set(Int(self.tabBar.frame.size.height), forKey: "tabBarHeight") 
+        
     }
     
     func setMainViewControllerToCurrent() {

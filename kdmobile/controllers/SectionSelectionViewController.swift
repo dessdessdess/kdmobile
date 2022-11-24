@@ -24,12 +24,20 @@ class SectionSelectionViewController: UIViewController {
     
     private lazy var showTasksButton: UIButton = {
         
-        let showTasksButton = UIButton()
+        var configuration = UIButton.Configuration.filled()
+        configuration.automaticallyUpdateForSelection = true
+        configuration.cornerStyle = .medium
+        configuration.baseBackgroundColor = UIColor(hexString: "008e55")
+        //configuration. = UIColor(hexString: "008e55")
+        
+        let showTasksButton = UIButton(configuration: configuration, primaryAction: nil)
+        
         showTasksButton.translatesAutoresizingMaskIntoConstraints = false
         showTasksButton.setTitle("Задания на \(MainButtons.mainButtonsDeclinationTasks[MainButtons.mainButtons[self.sectionIndex]] ?? "")", for: .normal)
         showTasksButton.setTitleColor(.white, for: .normal)
-        showTasksButton.backgroundColor = UIColor(hexString: "008e55")
-        showTasksButton.layer.cornerRadius = 10
+//        showTasksButton.backgroundColor = UIColor(hexString: "008e55")
+//        showTasksButton.layer.cornerRadius = 10
+        //showTasksButton.layer.borderColor = UIColor(hexString: "008e55").cgColor
         showTasksButton.addTarget(self, action: #selector(showTasksButtonTapped), for: .touchUpInside)
         return showTasksButton
         

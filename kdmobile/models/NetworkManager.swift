@@ -92,5 +92,104 @@ final class NetworkManager {
         task.resume()       
         
     }
+    
+    func getTasks(completion: @escaping ([TaskModel]?)->Void) {
+        
+        let params = ["GUIDСклада": warehouseGuid,
+                      "GUIDПользователя": userGuid]
+        guard let request = getRequest(with: params, requestPath: "/Read/Tasks") else { return }
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    
+                    if let data = data {
+                        
+                        let decoder = JSONDecoder()
+                        
+                        if let dataTasksFromNetwork = try? decoder.decode([TaskModel].self, from: data) {
+                            
+                            DispatchQueue.main.async {
+                                
+                                completion(dataTasksFromNetwork)
+                                                            
+                            }
+                            
+                        } else {
+                            completion(nil)
+                            
+                        }
+                        
+                    }
+                                        
+                } else {
+                    
+                    print(httpResponse.statusCode)
+                    completion(nil)
+                    
+                }
+            }
+        }
+               
+        task.resume()
+        
+    }
+    
+    func acceptTasks(selectedTasksToTransfer:[[String:String]], completion: @escaping ()->Void) {
+        
+        let params: [String:Any] = ["GUIDПользователя":userGuid,
+                                    "МассивЗаданий":selectedTasksToTransfer]
+        
+        
+        guard let request = getRequest(with: params, requestPath: "/Write/AcceptTasks") else { return }
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                                           
+                        DispatchQueue.main.async {
+                            
+                            completion()
+                            
+                        }
+                                        
+                } else {
+                    
+                    print(httpResponse.statusCode)
+                    completion()
+                    
+                }
+            }
+        }
+        
+        task.resume()
+        
+    }
+    
+    func auth(with base64LoginString: String, completion: @escaping (Int) -> Void) {
+        
+        guard let url = URL(string: "\(pathToServer)/Test") else { return }
+                
+        var request = URLRequest(url: url,timeoutInterval: 30)
+        request.addValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                DispatchQueue.main.async {
+                    completion(httpResponse.statusCode)
+                }
+            }
+                                    
+        }
+        
+        task.resume()
+        
+    }
+
 }
 

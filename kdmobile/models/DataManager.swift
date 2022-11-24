@@ -84,6 +84,23 @@ class DataManager: NSObject {
         return false
     }
     
+    func getAcceptedTasks(with text: String) -> [AcceptedTask] {
+        acceptedTaskFetchRequest.predicate = NSPredicate(format: "(number CONTAINS[cd] %@) OR (client CONTAINS[cd] %@)", text, text)
+        if let acceptedTasks = try? persistentContainer.viewContext.fetch(acceptedTaskFetchRequest) {
+            return acceptedTasks
+        }
+        
+        return []
+    }
+    
+    func getAllAcceptedTasks() -> [AcceptedTask] {
+        acceptedTaskFetchRequest.predicate = nil
+        if let acceptedTasks = try? persistentContainer.viewContext.fetch(acceptedTaskFetchRequest) {
+            return acceptedTasks
+        }
+        return []
+    }
+    
     func createAcceptedTask(acceptedTask: AcceptedTaskModel) {
         
         let newAcceptedTask = AcceptedTask(context: persistentContainer.viewContext)

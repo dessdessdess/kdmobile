@@ -63,7 +63,7 @@ class LoginView: UIView {
         return passwordTextField
     }()
     
-    private let loginButton: UIButton = {
+    let loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.setTitle("Войти", for: .normal)
@@ -113,7 +113,7 @@ class LoginView: UIView {
             self.logoImageView.centerYAnchor.constraint(equalTo: self.serviceView.centerYAnchor),
             
             self.userNameTextField.heightAnchor.constraint(equalToConstant: 50),
-            self.userNameTextField.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 60),
+            self.userNameTextField.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 20),
             self.userNameTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 20),
             self.userNameTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             

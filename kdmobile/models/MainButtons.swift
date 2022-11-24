@@ -13,7 +13,7 @@ class MainButtons {
         "Приемка",
         "Отгрузка",
         "Инвентаризация",
-        "Возврат товара",
+        "Возврат товара"
     ]
     
     static let mainButtonsDeclinationTasks: [String : String] = ["Приемка":"приемку",

@@ -54,55 +54,41 @@ class LoginViewController: UIViewController, LoginViewProtocol {
             let keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
             self.keyboardHeight = keyboardFrame.size.height
         }
-        
-        self.loginView.scrollView.contentOffset.y = self.loginView.scrollView.contentSize.height - (self.loginView.scrollView.frame.height - self.keyboardHeight) //+ 20
+                        
+        self.loginView.scrollView.contentOffset = CGPoint(x: 0, y: -1*(self.loginView.frame.height-self.keyboardHeight-self.loginView.scrollView.contentSize.height))
         
     }
     
     @objc private func keyboardWillHide() {
-        self.loginView.scrollView.contentOffset.y = 0
+        self.loginView.scrollView.contentOffset = CGPoint.zero
     }
     
-    //MARK: - bussines logic
+    //MARK: - business logic
     func loginButtonTapped() {
+        
         guard let userName = self.loginView.userNameTextField.text, let password = self.loginView.passwordTextField.text else { return }
         let loginString = "\(userName):\(password)"
         guard let loginData = loginString.data(using: String.Encoding.utf8) else { return }
-    
         let base64LoginString = loginData.base64EncodedString()
         
-        guard let url = URL(string: "http://192.168.11.30/Brinex_abzanov.r/hs/StoragePointV2/Test") else { return }
-                
-        var request = URLRequest(url: url,timeoutInterval: 30)
-        request.addValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-
-        request.httpMethod = "GET"
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        NetworkManager.configuredNetworkManager().auth(with: base64LoginString) {
             
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    
-                    self.saveAuthorizationData(userName: userName, password: password)
-                    
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                    
-                } else {
-                    
-                    DispatchQueue.main.async {
-                        self.loginView.userNameTextField.shake()
-                        self.loginView.passwordTextField.shake()
-                        
-                    }
-                    
-                }
+            [weak self] statusCode in
+            
+            if statusCode == 200 {
+                
+                self?.saveAuthorizationData(userName: userName, password: password)
+                self?.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                self?.loginView.userNameTextField.shake()
+                self?.loginView.passwordTextField.shake()
+                
             }
-                                    
+            
         }
         
-        task.resume()
     }
     
     private func saveAuthorizationData(userName: String, password: String) {
