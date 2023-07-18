@@ -39,11 +39,14 @@ class DetailTaskViewController: UIViewController {
     }
     
     @objc private func didTapScanButton() {
-        let alert = UIAlertController(title: "Внимание",
-                                      message: "Должна запуститься камера для сканирования КМ",
-                                      preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
-        self.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "Внимание",
+//                                      message: "Должна запуститься камера для сканирования КМ",
+//                                      preferredStyle: UIAlertController.Style.alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default))
+//        self.present(alert, animated: true, completion: nil)
+        let scannerVC = ScannerViewController()
+        scannerVC.detailVC = self
+        navigationController?.pushViewController(scannerVC, animated: true)
     }
     
     private func setupSubviews() {
@@ -86,6 +89,15 @@ class DetailTaskViewController: UIViewController {
         //self.tableView.estimatedRowHeight = 44
         self.tableView.rowHeight = UITableView.automaticDimension
                 
+    }
+    
+    func addCount() {
+        let currentProduct = self.products[0]
+        if currentProduct.scanCount < currentProduct.count {
+            currentProduct.scanCount += 1
+            dataManager?.saveContext()
+            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        }
     }
         
 }

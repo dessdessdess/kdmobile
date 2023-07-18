@@ -10,8 +10,8 @@ import UIKit
 
 final class NetworkManager {
     
-    private let pathToServer = "http://192.168.11.30/Brinex_abzanov.r/hs/StoragePointV2"
-    private let userGuid = "eaf3c420-11c1-11e6-814f-c81f66f5f5a5"
+    private let pathToServer = "http://31.13.133.10/brinex/hs/StoragePointV2"
+    private let userGuid = "169424d7-0796-11ea-bbc4-14187764496c"
     private let warehouseGuid = "313dd8f4-b47f-11eb-bbaa-c81f66f5fe1a"
     
     static func configuredNetworkManager() -> NetworkManager {
@@ -33,7 +33,7 @@ final class NetworkManager {
         
         var request = URLRequest(url: url,timeoutInterval: 30)
         request.addValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-        
+           
         guard let jsonData = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted) else { return nil }
         
         request.httpMethod = "POST"

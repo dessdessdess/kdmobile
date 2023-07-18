@@ -11,7 +11,7 @@ class LoginViewController: UIViewController, LoginViewProtocol {
      
     //MARK: - properties
     let loginView = LoginView()
-    private var keyboardHeight:CGFloat = 0
+    //private var keyboardHeight:CGFloat = 0
     
     //MARK: - view lifecycle
     override func loadView() {
@@ -49,18 +49,28 @@ class LoginViewController: UIViewController, LoginViewProtocol {
     
     @objc private func keyboardWillShow(notification:NSNotification) {
         
-        if self.keyboardHeight == 0 {
+        //if self.keyboardHeight == 0 {
             guard let userInfo = notification.userInfo else { return }
-            let keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-            self.keyboardHeight = keyboardFrame.size.height
-        }
+            let keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            //self.keyboardHeight = keyboardFrame.size.height
+            //print(keyboardFrame.minY)
+            //print(keyboardFrame.maxY)
+        //}
                         
-        self.loginView.scrollView.contentOffset = CGPoint(x: 0, y: -1*(self.loginView.frame.height-self.keyboardHeight-self.loginView.scrollView.contentSize.height))
+        //self.loginView.scrollView.contentOffset = CGPoint(x: 0, y: -1*(self.loginView.frame.height-self.keyboardHeight-self.loginView.scrollView.contentSize.height))
+//        print("self.loginView.loginButton.frame.minY \(self.loginView.loginButton.frame.minY)")
+//        print("self.loginView.loginButton.frame.height \(self.loginView.loginButton.frame.height)")
+//        print("self.view.frame.height  \(self.view.frame.height )")
+//        //print(keyboardFrame.size.height)
+//        print("self.keyboardHeight \(self.keyboardHeight)")
+        self.loginView.scrollView.contentOffset = CGPoint(x: 0, y: self.loginView.loginButton.frame.minY + self.loginView.loginButton.frame.height + 20 - (self.view.frame.height - keyboardFrame.size.height))
         
     }
     
     @objc private func keyboardWillHide() {
         self.loginView.scrollView.contentOffset = CGPoint.zero
+        //self.keyboardHeight = 0
     }
     
     //MARK: - business logic

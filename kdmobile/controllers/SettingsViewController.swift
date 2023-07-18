@@ -41,9 +41,9 @@ class SettingsViewController: UIViewController {
         userDefaults.removeObject(forKey: UserDefaultsKeys.password)
         userDefaults.removeObject(forKey: UserDefaultsKeys.isAuthorized)
             
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        present(loginVC, animated: false, completion: nil)
+//        let loginVC = LoginViewController()
+//        loginVC.modalPresentationStyle = .fullScreen
+//        present(loginVC, animated: false, completion: nil)
         
         tabBarDelegate?.setMainViewControllerToCurrent()
         
